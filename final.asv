@@ -3,6 +3,7 @@ clear all;
 close all;
 Ed=0;
 er=0;
+
 nmed=0;
 med=0;
 mred=0;
@@ -24,6 +25,9 @@ disp("Starting simulation...");
 for i = 1:1000000
     num = randi(2^(2*n_bits)-1);
     denom = randi(num);
+    if(denom==1 || denom==2)
+    continue;
+    end
     
     val = val+1;
     

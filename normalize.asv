@@ -1,0 +1,48 @@
+function [ex,x] = normalize(num, n_bits)
+    arr = de2bi(num, 'left-msb', 2*n_bits);
+    idx = 1;
+    temp_and = true;
+    temp_or = false;
+    
+    while(idx <= 2*n_bits)
+        if(arr(idx) == 1)
+            break;
+        end
+        idx = idx+1;
+    end
+    
+    lod = 2*n_bits-idx+1;
+    x = 0;
+    temp = -1;
+    lim = min(idx+n_bits-1, 2*n_bits);
+    
+    while(idx<=lim)
+        if(arr(idx) == 1)
+            x = x + 2^(temp);
+        end
+        temp_and = temp&arr(idx);
+        temp = temp - 1;
+        idx = idx+1;
+    
+    end
+    
+    temp_idx=idx;
+    
+    while(temp_idx < 2*n_bits && temp_idx < lim+n_bits)
+        temp_or = temp_or | arr(temp_idx);
+        temp_idx = temp_idx+1;
+    end
+    
+    if(temp_or && temp_and)
+        x = 1;
+    else if
+        x = x+2^temp;
+    end
+    
+       disp(arr);
+       disp(x);
+       disp(lod);
+       
+       ex = lod;
+    
+end
