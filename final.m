@@ -21,7 +21,7 @@ n_bits = 8;
 
 disp("Starting simulation...");
 
-for i = 1:1000000
+for i = 1:1000
     num = randi(2^(2*n_bits)-1);
     denom = randi(num);
     
